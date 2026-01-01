@@ -31,7 +31,7 @@ game.Loaded:Wait()
 local hash_table = {}
 local script_source = "=ReplicatedFirst.LocalScript  "
 
-for _, v in ipairs(getgc(true)) do
+for _, v in ipairs(getgc()) do
     if type(v) == "function" and not isexecutorclosure(v) and not iscclosure(v) then
         local info = getinfo(v)
         if info.source and info.source:find(script_source) then
