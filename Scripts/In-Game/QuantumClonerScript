@@ -1,69 +1,50 @@
--- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
--- Decompiled on 2026-01-01 01:01:41
--- Luau version 6, Types version 3
--- Time taken: 0.003471 seconds
-
-local QuantumCloner_upvr = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ToolsFrames").QuantumCloner
-local Packages = game:GetService("ReplicatedStorage"):WaitForChild("Packages")
-local Net_upvr = require(Packages.Net)
-local Parent = script.Parent
-local Parent_upvr = Parent.Parent.Parent
-local var7_upvw
-Parent.Activated:Connect(function() -- Line 26
-    --[[ Upvalues[1]:
-        [1]: Net_upvr (readonly)
-    ]]
-    Net_upvr:RemoteEvent("UseItem"):FireServer()
+local v1 = game:GetService("Players")
+local v_u_2 = game:GetService("RunService")
+game:GetService("StarterPlayer")
+local v3 = game:GetService("ReplicatedStorage")
+game:GetService("ServerScriptService")
+local v_u_4 = v1.LocalPlayer.PlayerGui:WaitForChild("ToolsFrames").QuantumCloner
+local v5 = v3:WaitForChild("Controllers")
+require(v5.CharacterController)
+local v6 = v3:WaitForChild("Packages")
+local v_u_7 = require(v6.Net)
+local v_u_8 = require(v6.Debounce)
+local v9 = script.Parent
+local v_u_10 = v9.Parent.Parent
+local v_u_11 = nil
+v9.Activated:Connect(function()
+	-- upvalues: (copy) v_u_7
+	local _ = game.Players.LocalPlayer
+	v_u_7:RemoteEvent("UseItem"):FireServer()
 end)
-local RunService_upvr = game:GetService("RunService")
-Parent.Equipped:Connect(function() -- Line 31
-    --[[ Upvalues[4]:
-        [1]: var7_upvw (read and write)
-        [2]: RunService_upvr (readonly)
-        [3]: Parent_upvr (readonly)
-        [4]: QuantumCloner_upvr (readonly)
-    ]]
-    var7_upvw = RunService_upvr.Heartbeat:Connect(function() -- Line 32
-        --[[ Upvalues[2]:
-            [1]: Parent_upvr (copied, readonly)
-            [2]: QuantumCloner_upvr (copied, readonly)
-        ]]
-        debug.profilebegin("QuantumCloner:Update")
-        if workspace:FindFirstChild(`{Parent_upvr.UserId}_Clone`) then
-            QuantumCloner_upvr.Visible = true
-        end
-        debug.profileend()
-    end)
+v9.Equipped:Connect(function()
+	-- upvalues: (ref) v_u_11, (copy) v_u_2, (copy) v_u_10, (copy) v_u_4
+	v_u_11 = v_u_2.Heartbeat:Connect(function()
+		-- upvalues: (ref) v_u_10, (ref) v_u_4
+		debug.profilebegin("QuantumCloner:Update")
+		if workspace:FindFirstChild((("%*_Clone"):format(v_u_10.UserId))) then
+			v_u_4.Visible = true
+		end
+		debug.profileend()
+	end)
 end)
-Parent.Unequipped:Connect(function() -- Line 42
-    --[[ Upvalues[2]:
-        [1]: var7_upvw (read and write)
-        [2]: QuantumCloner_upvr (readonly)
-    ]]
-    if var7_upvw then
-        var7_upvw:Disconnect()
-    end
-    QuantumCloner_upvr.Visible = false
+v9.Unequipped:Connect(function()
+	-- upvalues: (ref) v_u_11, (copy) v_u_4
+	if v_u_11 then
+		v_u_11:Disconnect()
+	end
+	v_u_4.Visible = false
 end)
-Parent_upvr.CharacterAdded:Connect(function() -- Line 49
-    --[[ Upvalues[2]:
-        [1]: QuantumCloner_upvr (readonly)
-        [2]: var7_upvw (read and write)
-    ]]
-    QuantumCloner_upvr.Visible = false
-    if var7_upvw then
-        var7_upvw:Disconnect()
-    end
+v_u_10.CharacterAdded:Connect(function()
+	-- upvalues: (copy) v_u_4, (ref) v_u_11
+	v_u_4.Visible = false
+	if v_u_11 then
+		v_u_11:Disconnect()
+	end
 end)
-local Debounce_upvr = require(Packages.Debounce)
-QuantumCloner_upvr.TeleportToClone.MouseButton1Up:Connect(function() -- Line 56
-    --[[ Upvalues[3]:
-        [1]: Debounce_upvr (readonly)
-        [2]: Parent_upvr (readonly)
-        [3]: Net_upvr (readonly)
-    ]]
-    if Debounce_upvr(`ItemUse/QuantumClonerTeleport/{Parent_upvr.Name}`, 5) then
-    else
-        Net_upvr:RemoteEvent("QuantumCloner/OnTeleport"):FireServer()
-    end
+v_u_4.TeleportToClone.MouseButton1Up:Connect(function()
+	-- upvalues: (copy) v_u_8, (copy) v_u_10, (copy) v_u_7
+	if not v_u_8(("ItemUse/QuantumClonerTeleport/%*"):format(v_u_10.Name), 5) then
+		v_u_7:RemoteEvent("QuantumCloner/OnTeleport"):FireServer()
+	end
 end)
