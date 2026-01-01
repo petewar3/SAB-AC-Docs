@@ -12,4 +12,4 @@ By the end of this documentation you should be able to know:
 - What the function argument and return results represent
 - How to actaully bypass the anti-cheat itself
 
-Next: [Modern Anti-Cheat Architecture](https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Modern%20Anti-Cheat%20Architecture.md
+Next: [Modern Anti-Cheat Architecture](https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Modern%20Anti-Cheat%20Architecture.md)
