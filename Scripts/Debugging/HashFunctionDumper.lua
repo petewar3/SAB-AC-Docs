@@ -34,7 +34,7 @@ local script_source = "=ReplicatedFirst.LocalScript  "
 for _, v in ipairs(getgc(true)) do
     if type(v) == "function" and not isexecutorclosure(v) and not iscclosure(v) then
         local info = getinfo(v)
-        if info.source and info.source:find("ReplicatedFirst.LocalScript") then
+        if info.source and info.source:find(script_source) then
             local hash = getfunctionhash(v)
             hash_table[#hash_table + 1] = hash
         end
