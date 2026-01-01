@@ -1,0 +1,75 @@
+-- run in autoexec please so it runs before replicated first
+local function TableToString(tbl, return_table)
+    local function serialize(t, indent)
+        indent = indent or 0
+        local pad = string.rep(" ", indent)
+        local lines = {"{\n"}
+        local keys = {}
+        for k in pairs(t) do table.insert(keys, k) end
+        table.sort(keys)
+        
+        for i, k in ipairs(keys) do
+            local v = t[k]
+            local key = type(k) == "string" and k or string.format("%q", k)
+            
+            local value
+            if typeof(v) == "Instance" then
+                value = string.format('Instance.new("%s") -- %s', v.ClassName, v.Name)
+            elseif typeof(v) == "Vector3" then
+                value = string.format('Vector3.new(%f, %f, %f)', v.X, v.Y, v.Z)
+            elseif typeof(v) == "CFrame" then
+                value = string.format('CFrame.new(%f, %f, %f)', v.Position.X, v.Position.Y, v.Position.Z)
+            elseif type(v) == "table" then
+                value = serialize(v, indent + 4)
+            elseif type(v) == "string" then
+                value = string.format("%q", v)
+            else
+                value = tostring(v)
+            end
+            
+            lines[#lines + 1] = pad .. "  " .. key .. " = " .. value .. (i < #keys and "," or "") .. "\n"
+        end
+        lines[#lines + 1] = pad .. "}"
+        return table.concat(lines)
+    end
+    
+    if return_table then
+        return "return " .. serialize(tbl)
+    end
+    
+    return "local hash_table = " .. serialize(tbl)
+end
+
+game.Loaded:Wait()
+local script_source = "=ReplicatedFirst.LocalScript  "
+local function_log = {}
+local safe_select = clonefunction(select)
+
+for _, func in pairs(getgc()) do
+    if type(func) == "function" and not isexecutorclosure(func) and not iscclosure(func) then
+        local info = getinfo(func)
+        if info.source and info.source:find("ReplicatedFirst.LocalScript") then
+            local hash = getfunctionhash(func)
+            local original_function = func
+            
+            hookfunction(func, newcclosure(function(...)
+                local result = original_function(...)
+                
+                function_log[hash] = function_log[hash] or {calls = {}}
+                table.insert(function_log[hash].calls, {
+                    arg_count = safe_select("#", ...),
+                    arg_types = {},
+                    return_type = typeof(result)
+                })
+            
+                for i = 1, math.min(100, safe_select("#", ...) or 0) do
+                    function_log[hash].calls[#function_log[hash].calls].arg_types[i] = typeof(safe_select(i, ...) or "nil")
+                end
+                
+                return result
+            end))
+        end
+    end
+end
+
+writefile("FUNCTION_INFO_LOGGED.lua", TableToString(function_log))
