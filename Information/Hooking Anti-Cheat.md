@@ -15,7 +15,7 @@ Eventually I managed to find a function with a hash of ```"293cf47e10f01f0fc030c
 
 <img width="1440" height="900" alt="ExecutorAssetDetetion" src="https://github.com/user-attachments/assets/4df80f1b-c2c4-40b2-b0f8-aa8473ed87c7" />
 
-I can confirm that this is the function used for anti-cheat since it is seen 18 times in the getgc function hash dump and the fact that the function is also being called and returned with completely different arguments to asset detection such as HttpService:GenerateGUID() and os.time
+I can confirm that this is the function used for anti-cheat since it is seen 18 times in the getgc function hash dump and the fact that the function is also being called and returned with completely different arguments to asset detection such as HttpService:GenerateGUID and os.time which we will later find out the meaning of it
 
 <img width="1440" height="900" alt="Screenshot 2025-12-30 at 17 39 17" src="https://github.com/user-attachments/assets/9e52fe5c-bd79-4f0f-a79c-337887e569b6" />
 
