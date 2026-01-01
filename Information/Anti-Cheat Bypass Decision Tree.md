@@ -17,4 +17,4 @@ Now with the decisions made on how I was going to bypass the anti-cheat I can pr
 
 Back: [Identifying Anti-Cheat](https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Identifying%20Anti-Cheat.md)
 
-Next: [Hooking Anti-Cheat]("https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Hooking%20Anti-Cheat.md)
+Next: [Hooking Anti-Cheat](https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Hooking%20Anti-Cheat.md)
