@@ -16,4 +16,6 @@ hidden scripts in steal a brainrot that may potentially be anti-cheat.
 
 This is all that you will need to know for now on how modern anti-cheats operates
 
+Back: [Introduction](https://github.com/petewar3/SAB-AC-Docs/blob/main/Introduction.md)
+
 Next: [Identifying Anti-Cheat](https://github.com/petewar3/SAB-AC-Docs/blob/main/Information/Identifying%20Anti-Cheat.md)
