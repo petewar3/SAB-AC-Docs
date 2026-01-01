@@ -3,7 +3,7 @@
 **Recap:**
 - Anti-Cheats are placed in ReplicatedFirst to have earlier execution then some executors
 - Anti-Cheats hide themself by destroying or parenting themself to nil
-- Hidden Anti-Cheats can still be found by using getnil instances
+- Hidden Anti-Cheats can still be found by using getnilinstances
 
 Based on this recap we can see a **important detail** that anti-cheats can still be found using getnilinstances.
 
