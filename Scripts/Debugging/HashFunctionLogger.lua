@@ -7,7 +7,7 @@ for _, func in pairs(getgc()) do
         warn("Hash Function Located!")
         local old; old = hookfunction(func, newcclosure(function(...)
             warn("Hash Function Called!")
-            local result = old(...) -- prevent function verified runtime checks to check whether the function was ran or not with flags, let it run as normal however only spoof the result itself
+            local result = old(...) -- prevent function verified runtime checks to check whether the function was ran or not with flags, let it run as normal however only spoof the return result itself
             
             print("Function Called With:")
             for i = 1, select("#", ...) do
