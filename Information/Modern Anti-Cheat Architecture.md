@@ -1,4 +1,4 @@
-## Anti-Cheat Architecture
+## Modern Anti-Cheat Architecture
 
 To understand how steal a brainrots anti-cheat operates you need to know the modern anti-cheat architecture.
 
